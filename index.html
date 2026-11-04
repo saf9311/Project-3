@@ -38,19 +38,67 @@
       transition: opacity 0.5s ease;
     }
 
-    .tap-text {
-      color: white;
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 15px 35px;
-      border: 2px solid white;
-      border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0.6);
-      user-select: none;
-    }
 
+    #subtitle-box {
+    position: absolute;
+    bottom: 30px;            
+    left: 50%;
+    transform: translateX(-50%); /* Centers it perfectly */
+    width: 80%;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: lightgoldenrodyellow;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    display: none; 
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+   #ivantalks {
+   position: absolute;
+   top: 15%;   
+   left: 38%;  
+   width: 38%; 
+   height: 45%;
+   cursor: pointer;
+   z-index: 10; /* text needs to be on top of the image */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 20px;
+}
+
+   .ivantalks {
+        color: lightgoldenrodyellow;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        user-select: none;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .ivantalks:hover {
+        background-color: rgba(50, 50, 50, 0.9);
+        transform: scale(1.05);
+      }
+
+      #guardcomes {
+      position: absolute;
+      top: 20%;
+      left: 5%;
+      width: 15%;
+      height: 35%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     audio {
       display: none;
     }
@@ -62,28 +110,64 @@
   <!-- Fullscreen Image -->
   <img src="first.jpeg" alt="Act 1 Picture" class="fullscreen-bg">
 
-  <!-- "Tap" Prompt Overlay -->
-  <div id="overlay">
-    <div class="tap-text">Tap to Play</div>
+  <!-- Subtitle Display -->
+  <div id="subtitle-box">...</div>
+
+  <!-- To make act 1 start when clicked -->
+  <div id="ivantalks">
+    <div class="ivantalks">Talk to Ivan</div>
   </div>
 
-  
+  <!-- The voice for act 1 -->
   <audio id="act1">
     <source src="act1.wav" type="audio/wav">
   </audio>
 
   <script>
-    const overlay = document.getElementById('overlay');
-    const audio = document.getElementById('act1'); 
+    const ivantalks = document.getElementById('ivantalks');
+    const audio = document.getElementById('act1');
+    const subtitleBox = document.getElementById('subtitle-box');
 
-    overlay.addEventListener('click', function() {
+    ivantalks.addEventListener('click', function() {
+      // Play act 1
       audio.play();
 
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 500);
+      // To hide the button and show the subtitle instead 
+      ivantalks.style.display = 'none';
+      subtitleBox.style.display = 'block';
     });
+
+    // Update subtitles based on who is talking and the second in the audio
+    audio.addEventListener('timeupdate', function() {
+      let currentTime = audio.currentTime;
+
+      if (currentTime >= 0 && currentTime < 3) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      } 
+      else if (currentTime >= 14 && currentTime < 20) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [talking]";
+      } 
+      else if (currentTime >= 7 && currentTime < 12) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      }
+      else if (currentTime >= 21 && currentTime < 30) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      }
+      else if (currentTime >= 30 && currentTime < 36) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [talking]";
+      }
+      else if (currentTime >= 36 && currentTime < 40) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      }
+      else if (currentTime >= 40 && currentTime < 42) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [talking]";
+      }
+      else {
+        subtitleBox.innerHTML = ""; // Hides subtitle when everyone is done talking
+      }
+    });
+
+
   </script>
 </body>
 </html>
