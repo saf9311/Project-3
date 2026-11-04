@@ -3,17 +3,87 @@
 
 <head>
     <meta charset="UTF-8">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Act 1</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: black;
+      font-family: Arial, sans-serif;
+    }
 
-        /* how the web is gonna look like */
-    </style>
+    .fullscreen-bg {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+
+    .tap-text {
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 15px 35px;
+      border: 2px solid white;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.6);
+      user-select: none;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
- <script>
-    
- </script>
+  <!-- Fullscreen Image -->
+  <img src="first.jpeg" alt="Act 1 Picture" class="fullscreen-bg">
 
+  <!-- "Tap" Prompt Overlay -->
+  <div id="overlay">
+    <div class="tap-text">Tap to Play</div>
+  </div>
+
+  <!-- Audio element named voice1 -->
+  <audio id="voice1">
+    <source src="act1.wav" type="audio/wav">
+  </audio>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const audio = document.getElementById('voice1'); // Matches id="voice1"
+
+    overlay.addEventListener('click', function() {
+      audio.play();
+
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 500);
+    });
+  </script>
 </body>
 </html>
