@@ -90,18 +90,39 @@
       #guardcomes {
       position: absolute;
       top: 20%;
-      left: 5%;
-      width: 15%;
-      height: 35%;
+      left: 2%;
+      width: 20%;
+      height: 40%;
       cursor: pointer;
       z-index: 10;
-      display: flex;
+      display: none; /* stays hidden till audio is done */
       justify-content: center;
       align-items: center;
     }
+
     audio {
       display: none;
     }
+
+    .guardtap {
+      color: #80deeb;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #1392a2;
+      user-select: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .guardtap:hover {
+      background-color: rgba(35, 200, 222, 0.72);
+      transform: scale(1.05);
+    }
+    
   </style>
 </head>
 
@@ -118,6 +139,11 @@
     <div class="ivantalks">Talk to Ivan</div>
   </div>
 
+  <!-- Takes you to the next act if you press on it -->
+  <div id="guardcomes">
+    <div class="guardtap">Find out who's coming</div>
+  </div>
+
   <!-- The voice for act 1 -->
   <audio id="act1">
     <source src="act1.wav" type="audio/wav">
@@ -125,6 +151,7 @@
 
   <script>
     const ivantalks = document.getElementById('ivantalks');
+    const guardHotspot = document.getElementById('guardcomes');
     const audio = document.getElementById('act1');
     const subtitleBox = document.getElementById('subtitle-box');
 
@@ -132,9 +159,14 @@
       // Play act 1
       audio.play();
 
+     //clicking on the shadow figure takes you to the next act
+    guardHotspot.addEventListener('click', function() {
+      window.location.href = 'guard.html';
+    });
+
       // To hide the button and show the subtitle instead 
-      ivantalks.style.display = 'none';
-      subtitleBox.style.display = 'block';
+     ivantalks.style.display = 'none';
+     subtitleBox.style.display = 'block';
     });
 
     // Update subtitles based on who is talking and the second in the audio
@@ -165,8 +197,11 @@
       else {
         subtitleBox.innerHTML = ""; // Hides subtitle when everyone is done talking
       }
+     // Guard appears after the act 1 is done, so user can click for next act
+      if (currentTime >= 42) {
+        guardcomes.style.display = 'flex';
+      }
     });
-
 
   </script>
 </body>
