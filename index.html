@@ -63,7 +63,7 @@
    width: 38%; 
    height: 45%;
    cursor: pointer;
-   z-index: 10; /* text needs to be on top of the image */
+   z-index: 10; /* text needs to be on top of the character */
    display: flex;
    justify-content: center;
    align-items: center;
@@ -151,7 +151,7 @@
 
   <script>
     const ivantalks = document.getElementById('ivantalks');
-    const guardHotspot = document.getElementById('guardcomes');
+    const guardcomes = document.getElementById('guardcomes');
     const audio = document.getElementById('act1');
     const subtitleBox = document.getElementById('subtitle-box');
 
@@ -160,7 +160,7 @@
       audio.play();
 
      //clicking on the shadow figure takes you to the next act
-    guardHotspot.addEventListener('click', function() {
+    guardcomes.addEventListener('click', function() {
       window.location.href = 'guard.html';
     });
 
