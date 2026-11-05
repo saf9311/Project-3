@@ -60,6 +60,68 @@
       display: none;
     }
 
+    #ivantalks {
+      position: absolute;
+      top: 25%;   
+      left: 60%;  
+      width: 25%; 
+      height: 40%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+   .ivantalks {
+      color: lightgoldenrodyellow;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      user-select: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .ivantalks:hover {
+      background-color: rgba(50, 50, 50, 0.9);
+      transform: scale(1.05);
+    }
+
+    #act2 {
+      position: absolute;
+      top: 20%;
+      left: 30%;
+      width: 20%;
+      height: 40%;
+      cursor: pointer;
+      z-index: 10;
+      display: none; 
+      justify-content: center;
+      align-items: center;
+    }
+
+    .act2button {
+      color: #80deeb;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #1392a2;
+      user-select: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .act2hover {
+      background-color: rgba(35, 200, 222, 0.72);
+      transform: scale(1.05);
+    }
+
  </style>
 </head>
 
@@ -75,6 +137,10 @@
     <source src="act2.wav" type="audio/wav">
   </audio>
 
-  
+  <!-- Starts act 2 sound when clicked -->
+  <div id="ivantalks">
+    <div class="ivantalks">Listen to Ivan</div>
+  </div>
+
 
 </body>
