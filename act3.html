@@ -101,7 +101,21 @@
       height: 35%;
       z-index: 10;
       display: none; /* Should only appear signed at 30 seconds */
-      cursor: url('pen-cursor.png'), crosshair; 
+      cursor: url('pen-cursor.jpg'), crosshair; 
+    }
+
+    .signing {
+      color: #80deeb;
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #1392a2;
+      user-select: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      animation: pulse 1.5s infinite;
     }
 
     </style>
@@ -109,7 +123,7 @@
 <body>
 
      <!-- Fullscreen Image and the audio starts with unsigned paper -->
-  <img id="unsigned" src="lady.png" alt="Act 3 picture of lady and signing" class="fullscreen-bg">
+  <img id="unsigned" src="unsigned.png" alt="Act 3 picture of lady and signing" class="fullscreen-bg">
 
   <!-- Subtitle Display -->
   <div id="subtitle-box">...</div>
@@ -120,7 +134,9 @@
   </div>
 
   <!-- Where signature will be interactive -->
-  <div id="signed"></div>
+  <div id="signed">
+    <div class="signing">Sign the Paper</div>
+    </div>
 
   <!-- The voice for act 3 -->
   <audio id="act3">
@@ -128,7 +144,56 @@
   </audio>
 
   <script>
+    const ladytalks = document.getElementById('ladytalks');
+    const audio = document.getElementById('act3');
+    const subtitleBox = document.getElementById('subtitle-box');
+    const unsigned = document.getElementById('unsigned');
+    const signed = document.getElementById('signed');
+
+    let isSigned = false;
+
+    // For sound to start when button is clicked
+    ladytalks.addEventListener('click', function() {
+      audio.play();
+      ladytalks.style.display = 'none';
+      subtitleBox.style.display = 'block';
+    });
+
+    // To track the audio time 
+    audio.addEventListener('timeupdate', function() {
+      let currentTime = audio.currentTime;
+
+      // Subtitles for act 3 in order of the seconds from when each character talks
+      if (currentTime >= 3 && currentTime < 19) {
+        subtitleBox.innerHTML = "<strong>Lady:</strong> [talking]";
+      } 
+      else if (currentTime >= 20 && currentTime < 23) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [mumbling]";
+      } 
+      else if (currentTime >= 25 && currentTime < 28) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [talking sarcastically]";
+      }
+      else if (currentTime >= 29 && currentTime <= 36) {
+        subtitleBox.innerHTML = "<strong>Lady:</strong> [replying sarcastically]";
+      }
+      else {
+        subtitleBox.innerHTML = "";
+      }
+
+      // So that the cursor turns into a pen when the time is 19 seconds into the audio
+      if (currentTime >= 19 && currentTime < 30 && !isSigned) {
+        signed.style.display = 'block';
+      }
+
+      // When time is 30 seconds the signed image will be placed instead
+      if (currentTime >= 30 && !isSigned) {
+        unsigned.src = 'lady.png';
+        isSigned = true;
+        signed.style.display = 'none';
+      }
+    });
 
   </script>
 
 </body>
+</html>
