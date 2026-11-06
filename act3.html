@@ -61,12 +61,55 @@
       display: none;
     }
 
+    /* Sound start button is positioned on the lady */
+    #ladytalks {
+      position: absolute;
+      top: 15%;   
+      left: 38%;  
+      width: 25%; 
+      height: 35%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ladytalks {
+      color: lightgoldenrodyellow;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      user-select: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .ladytalks:hover {
+      background-color: rgba(50, 50, 50, 0.9);
+      transform: scale(1.05);
+    }
+
+    /* Where the paper is going to be signed */
+    #signed {
+      position: absolute;
+      top: 60%;
+      left: 30%;
+      width: 40%;
+      height: 35%;
+      z-index: 10;
+      display: none; /* Should only appear signed at 30 seconds */
+      cursor: url('pen.png'), crosshair; 
+    }
+
     </style>
 </head>
 <body>
 
-     <!-- Fullscreen Image -->
-  <img src="lady.png" alt="Act 3 Picture" class="fullscreen-bg">
+     <!-- Fullscreen Image and the audio starts with unsigned paper -->
+  <img id="unsigned" src="lady.png" alt="Act 3 picture of lady and signing" class="fullscreen-bg">
 
   <!-- Subtitle Display -->
   <div id="subtitle-box">...</div>
@@ -76,9 +119,16 @@
     <div class="ladytalks">Talk to the Lady</div>
   </div>
 
+  <!-- Where signature will be interactive -->
+  <div id="signed"></div>
+
   <!-- The voice for act 3 -->
   <audio id="act3">
     <source src="act3.wav" type="audio/wav">
   </audio>
+
+  <script>
+    
+  </script>
 
 </body>
