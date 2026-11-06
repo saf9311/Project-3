@@ -118,6 +118,36 @@
       animation: pulse 1.5s infinite;
     }
 
+    #freedom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* So it could stay in the center */
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .freedom {
+      color: #b7d0ab;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      background-color: rgb(105, 202, 70);
+      border: 2px solid #fff;
+      user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.644);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      
+    }
+
+    .freedom:hover {
+      background-color: #178925dd;
+
+    }
     </style>
 </head>
 <body>
@@ -143,12 +173,18 @@
     <source src="act3.wav" type="audio/wav">
   </audio>
 
+  <!-- The button to go to act 4 -->
+  <div id="freedom" style="display: none;">
+    <div class="freedom">Become free again</div>
+  </div>
+
   <script>
     const ladytalks = document.getElementById('ladytalks');
     const audio = document.getElementById('act3');
     const subtitleBox = document.getElementById('subtitle-box');
     const unsigned = document.getElementById('unsigned');
     const signed = document.getElementById('signed');
+    const freedom = document.getElementById('freedom');
 
     let isSigned = false;
 
@@ -157,6 +193,11 @@
       audio.play();
       ladytalks.style.display = 'none';
       subtitleBox.style.display = 'block';
+    });
+
+    // Freedom button appears and is clicked will make act 4 page come up
+    freedom.addEventListener('click', function() {
+      window.location.href = 'act4.html';
     });
 
     // To track the audio time 
@@ -190,6 +231,7 @@
         unsigned.src = 'lady.png';
         isSigned = true;
         signed.style.display = 'none';
+        freedom.style.display= 'flex'; // to show act 4 button
       }
     });
 
