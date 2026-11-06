@@ -117,7 +117,7 @@
       transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
-    .act3hover {
+    .act3next:hover {
       background-color: rgba(35, 200, 222, 0.72);
       transform: scale(1.05);
     }
@@ -142,13 +142,60 @@
     <div class="ivantalks">Listen to Ivan</div>
   </div>
 
+  <!--To go to act 3-->
+  <div id="act3next">
+    <div class="act3next">Go outside your cell</div>
+  </div>
+
   <script>
     const ivantalks = document.getElementById('ivantalks');
-    const nextActHotspot = document.getElementById('act3next');
+    const act3next = document.getElementById('act3next');
     const audio = document.getElementById('act2');
     const subtitleBox = document.getElementById('subtitle-box');
 
-    
+    // For the audio to hide when the button is clicked and Ivan starts talking
+    ivantalks.addEventListener('click', function() {
+      audio.play();
+      ivantalks.style.display = 'none';
+      subtitleBox.style.display = 'block';
+    });
+   
+    //To go to the next act when button is clicked
+    act3next.addEventListener('click', function() {
+      window.location.href = 'act3.html'; 
+    });
+
+    //Subtitles for act 2 in order of the seconds from when each character talks
+    audio.addEventListener('timeupdate', function() {
+      let currentTime = audio.currentTime;
+
+      if (currentTime >= 0 && currentTime < 5) {
+        subtitleBox.innerHTML = "Cell Opens";
+      } 
+      else if (currentTime >= 5 && currentTime < 13) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      } 
+      else if (currentTime >= 13 && currentTime < 16) {
+        subtitleBox.innerHTML = "<strong>Guard:</strong> [Speaks demandingly]";
+      }
+      else if (currentTime >= 16 && currentTime < 27) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [Talking]";
+      }
+      else if (currentTime >= 27 && currentTime < 30) {
+        subtitleBox.innerHTML = "<strong>Guard:</strong> [Speaking]";
+      }
+      else if (currentTime >= 30 && currentTime <= 33) {
+        subtitleBox.innerHTML = "<strong>Ivan:</strong> [talking]";
+      }
+      else {
+        subtitleBox.innerHTML = ""; // Clears subtitle after 33 seconds
+      }
+
+      // Show the button to go outside the cell after the 
+      if (currentTime >= 33) {
+        act3next.style.display = 'flex';
+      }
+    });
 
   </script>
 </body>
