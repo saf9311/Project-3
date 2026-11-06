@@ -56,3 +56,147 @@
     z-index: 5;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+    audio {
+      display: none;
+    }
+
+     #guardtalks {
+   position: absolute;
+   top: 15%;   
+   left: 38%;  
+   width: 38%; 
+   height: 45%;
+   cursor: pointer;
+   z-index: 10; /* text needs to be on top of the character */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 20px;
+}
+
+   .guardtalks {
+        color: lightgoldenrodyellow;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 15px 30px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        user-select: none;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .guardtalks:hover {
+        background-color: rgba(50, 50, 50, 0.9);
+        transform: scale(1.05);
+      }
+
+      /* The button for the next act  */
+    #freecell {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: none; /* So that it only appears when the audio is done */
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .freestyle {
+      color: #d6df8c;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      background-color: rgb(84, 120, 70);
+      border: 2px solid #fff;
+      user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      animation: pulse 1.5s infinite; /* makes the button move, freedom doesn't come that easily */
+      transition: background-color 0.2s ease;
+    }
+
+    .freestyle:hover {
+      background-color: #053c0b;
+      color: #fff;
+    }
+
+</style>
+</head>
+
+<body>
+
+    <!-- Fullscreen Image -->
+  <img src="cellopen.png" alt="Act 4 Picture" class="fullscreen-bg">
+
+  <!-- Subtitle Display -->
+  <div id="subtitle-box">...</div>
+
+  <!-- The voice for act 4 -->
+  <audio id="act4">
+    <source src="act4.wav" type="audio/wav">
+  </audio>
+
+  <!-- To make act 4 start when clicked -->
+  <div id="guardtalks">
+    <div class="guardtalks">Talk to the Guard</div>
+  </div>
+
+  <!-- The button for act 5 -->
+  <div id="freecell">
+    <div class="freestyle">Freedom at Last</div>
+  </div>
+
+  <script>
+
+    const guardtalks = document.getElementById('guardtalks');
+    const freecell = document.getElementById('freecell');
+    const audio = document.getElementById('act4');
+    const subtitleBox = document.getElementById('subtitle-box');
+
+    guardtalks.addEventListener('click', function() {
+      // Play act 4
+      audio.play();
+
+     // To hide the button and show the subtitle instead 
+     guardtalks.style.display = 'none';
+     subtitleBox.style.display = 'block';
+    });
+
+    // When clicked it will take user to act 5
+    freecell.addEventListener('click', function() {
+      window.location.href = 'act5.html';
+    });
+
+    // Update subtitles based on who is talking and the second in the audio
+    audio.addEventListener('timeupdate', function() {
+      let currentTime = audio.currentTime;
+
+      if (currentTime >= 0 && currentTime < 12) {
+        subtitleBox.innerHTML = "<strong>Guard:</strong> [threatening]";
+      } 
+      else if (currentTime >= 13 && currentTime < 16) {
+        subtitleBox.innerHTML = "<strong>Jerry:</strong> [talking]";
+      } 
+      else if (currentTime >= 17 && currentTime < 22) {
+        subtitleBox.innerHTML = "<strong>Guard:</strong> [talking]";
+      }
+      else if (currentTime >= 22 && currentTime < 28) {
+        subtitleBox.innerHTML = "<strong>Guard:</strong> [opens the cell]";
+      }
+      else {
+        subtitleBox.innerHTML = ""; // Hides subtitle when everyone is done talking
+      }
+      // At 28 seconds the button for act 5 will appear
+      if (currentTime >= 28) {
+        freecell.style.display = 'flex';
+      }
+    });
+      
+
+  </script>
+</body>
+</html>

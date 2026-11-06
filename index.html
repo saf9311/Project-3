@@ -122,6 +122,37 @@
       background-color: rgba(35, 200, 222, 0.72);
       transform: scale(1.05);
     }
+
+    /* Button that takes you to act 5 which is outside */
+    #free {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: none; /* Hidden until the cell opens at 28 seconds */
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .free-style {
+      color: #111;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      background-color: rgb(130, 223, 97);
+      border: 2px solid #fff;
+      user-select: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      transition: background-color 0.2s ease;
+    }
+
+    .free-style:hover {
+      background-color: #053c0b;
+      color: #fff;
+    }
     
   </style>
 </head>
@@ -197,8 +228,8 @@
       else {
         subtitleBox.innerHTML = ""; // Hides subtitle when everyone is done talking
       }
-     // Guard appears after the act 1 is done, so user can click for next act
-      if (currentTime >= 42) {
+     // Guard appears after the act 4 is done, so user can click for next act
+      if (currentTime >= 38) {
         guardcomes.style.display = 'flex';
       }
     });
